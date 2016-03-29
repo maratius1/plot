@@ -85,6 +85,49 @@ namespace Plot.Tests
             }
         }
 
+        [Fact]
+        public void multiple_labels_are_resolved_with_inheritance()
+        {
+            var metadataFactory = new AttributeMetadataFactory(new NullLogger());
+            var queryExecutorFactory = new Mock<IQueryExecutorFactory>();
+            var repositoryFactory = new Mock<IRepositoryFactory>();
+            var stateTracker = new EntityStateCache();
+            var proxyFactory = new DynamicProxyFactory(metadataFactory, new NullLogger());
+            using (var session = new GraphSession(new UnitOfWork(stateTracker), new List<IListener>(), queryExecutorFactory.Object, repositoryFactory.Object, stateTracker, proxyFactory))
+            {
+                var factory = new DynamicProxyFactory(metadataFactory, new NullLogger());
+                var entity = factory.Create(new Sub
+                {
+                    Id = "1"
+                }, session);
+                var metadata = metadataFactory.Create(entity);
+                Assert.Equal(2, metadata.Labels.Length);
+                Assert.Equal("Sub", metadata.Labels[0]);
+                Assert.Equal("Super", metadata.Labels[1]);
+            }
+        }
+
+        [Fact]
+        public void multiple_labels_are_not_resolved_with_inheritance_when_ignore_present()
+        {
+            var metadataFactory = new AttributeMetadataFactory(new NullLogger());
+            var queryExecutorFactory = new Mock<IQueryExecutorFactory>();
+            var repositoryFactory = new Mock<IRepositoryFactory>();
+            var stateTracker = new EntityStateCache();
+            var proxyFactory = new DynamicProxyFactory(metadataFactory, new NullLogger());
+            using (var session = new GraphSession(new UnitOfWork(stateTracker), new List<IListener>(), queryExecutorFactory.Object, repositoryFactory.Object, stateTracker, proxyFactory))
+            {
+                var factory = new DynamicProxyFactory(metadataFactory, new NullLogger());
+                var entity = factory.Create(new SubWithIgnore
+                {
+                    Id = "1"
+                }, session);
+                var metadata = metadataFactory.Create(entity);
+                Assert.Equal(1, metadata.Labels.Length);
+                Assert.Equal("SubWithIgnore", metadata.Labels[0]);
+            }
+        }
+
         public class Parent
         {
             public Parent()
@@ -121,6 +164,27 @@ namespace Plot.Tests
 
             [Relationship("HAS", Reverse = true)]
             public virtual  ClassAlpha Alpha { get; set; }
+        }
+
+        public class Sub : Super
+        {
+            
+        }
+
+        public class Super
+        {
+            public virtual string Id { get; set; }
+        }
+
+        public class SubWithIgnore : SuperWithIgnore
+        {
+            
+        }
+
+        [Ignore]
+        public class SuperWithIgnore
+        {
+            public virtual string Id { get; set; }
         }
     }
 }

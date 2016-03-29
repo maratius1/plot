@@ -69,7 +69,7 @@ namespace Plot.Sample.Data.Queries
                 {
                     return cypher;
                 }
-                cypher = cypher.Where("organisation.Name =~ {name}");
+                cypher = cypher.Where("organisation.Labels =~ {name}");
                 return cypher;
             }
         }

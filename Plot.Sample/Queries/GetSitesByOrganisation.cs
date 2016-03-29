@@ -8,7 +8,7 @@ namespace Plot.Sample.Queries
         {
             OrganisationId = organisationId;
             UserId = userId;
-            OrderBy = new[] { "site.Name" };
+            OrderBy = new[] { "site.Labels" };
         }
 
         public string OrganisationId { get; set; }

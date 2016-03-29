@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Neo4jClient, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Neo4jClient.1.1.0.29\lib\net45\Neo4jClient.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -94,6 +90,10 @@
     <None Include="Plot.Neo4j.nuspec" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Neo4jClient\Neo4jClient\Neo4jClient.csproj">
+      <Project>{343b9889-6ddf-4474-a1ec-05508a652e5a}</Project>
+      <Name>Neo4jClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plot\Plot.csproj">
       <Project>{56eb9ccc-95dd-4cc2-bba9-67658f04b49e}</Project>
       <Name>Plot</Name>

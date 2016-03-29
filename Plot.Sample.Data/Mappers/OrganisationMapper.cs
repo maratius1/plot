@@ -35,7 +35,7 @@ namespace Plot.Sample.Data.Mappers
             {
             }
 
-            protected override ICypherFluentQuery OnExecute(ICypherFluentQuery cypher)
+            /*protected override ICypherFluentQuery OnExecute(ICypherFluentQuery cypher)
             {
                 return cypher.ReturnDistinct((organisation, sites, accessGroups) => new OrganisationResult
                 {
@@ -43,7 +43,7 @@ namespace Plot.Sample.Data.Mappers
                     AccessGroups = accessGroups.CollectAs<AccessGroupNode>(),
                     Sites = sites.CollectAs<SiteNode>()
                 });
-            }
+            }*/
         }
 
         #endregion

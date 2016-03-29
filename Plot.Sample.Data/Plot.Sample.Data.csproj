@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Neo4jClient, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Neo4jClient.1.1.0.29\lib\net45\Neo4jClient.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -104,6 +100,10 @@
     <Compile Include="Results\VehicleResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Neo4jClient\Neo4jClient\Neo4jClient.csproj">
+      <Project>{343b9889-6ddf-4474-a1ec-05508a652e5a}</Project>
+      <Name>Neo4jClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plot.Neo4j\Plot.Neo4j.csproj">
       <Project>{70934b7a-3cdc-42ab-b6fc-ff164f7ac2aa}</Project>
       <Name>Plot.Neo4j</Name>

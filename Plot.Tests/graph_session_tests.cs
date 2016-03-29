@@ -23,7 +23,7 @@ namespace Plot.Tests
             {
                 var person = session.Get<Person>("1");
                 person.Name = "Ross";
-                person.Contacts[0].Name = "New Name";
+                person.Contacts[0].Name = "New Labels";
                 session.SaveChanges();
             }
             _fixture.GetMapper<Person>().Verify();

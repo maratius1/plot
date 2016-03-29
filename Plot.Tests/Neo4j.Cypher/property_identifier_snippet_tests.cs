@@ -11,7 +11,7 @@ namespace Plot.Tests.Neo4j.Cypher
         {
             var metadata = new NodeMetadata
             {
-                Name = "Node"
+                Labels = new [] { "Node" }
             };
             var entity = new
             {
@@ -28,7 +28,7 @@ namespace Plot.Tests.Neo4j.Cypher
         {
             var metadata = new NodeMetadata
             {
-                Name = "Node"
+                Labels = new [] { "Node" }
             };
             var entity = new
             {

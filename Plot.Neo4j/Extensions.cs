@@ -82,17 +82,22 @@ namespace Plot.Neo4j
 
         public static ICypherFluentQuery MatchById(this ICypherFluentQuery cypher, NodeMetadata metadata)
         {
-            return cypher.Match($"({CamelCase(metadata.Name)}:{metadata.Name})").Where($"{CamelCase(metadata.Name)}.Id in {{id}}");
+            return cypher.Match($"({CamelCase(metadata.Name)}:{metadata.ConcatLabels()})").Where($"{CamelCase(metadata.ConcatLabels())}.Id in {{id}}");
         }
 
         public static ICypherFluentQuery IncludeRelationships(this ICypherFluentQuery cypher, NodeMetadata metadata)
         {
-            return metadata.Properties.Where(x => x.HasRelationship && !x.Relationship.Lazy).Aggregate(cypher, (current, property) => current.OptionalMatch($"(({CamelCase(metadata.Name)}){new RelationshipSnippet(property.Relationship)}({CamelCase(property.Name)}:{property.Type.Name}))"));
+            return metadata.Properties.Where(x => x.HasRelationship && !x.Relationship.Lazy).Aggregate(cypher, (current, property) => current.OptionalMatch($"(({CamelCase(metadata.Name)}){new RelationshipSnippet(property.Relationship)}({CamelCase(property.Name)}:{property.Type.ConcatLabels()}))"));
+        }
+
+        public static string ConcatLabels(this NodeMetadata metadata)
+        {
+            return string.Join(":", metadata.Labels);
         }
 
         public static ICypherFluentQuery<TResult> Return<TResult>(this ICypherFluentQuery cypher, NodeMetadata metadata)
         {
-            var items = new List<object> {new AsSnippet(metadata)};
+            var items = new List<object> { new AsSnippet(metadata) };
             foreach (var propertyMetadata in metadata.Properties)
             {
                 if (propertyMetadata.IsPrimitive)
@@ -116,8 +121,14 @@ namespace Plot.Neo4j
                     items.Add(new PropertyAsSnippet(propertyMetadata));
                 }
             }
-            var identifier = string.Join(",", items.Select(x => x.ToString()).ToArray());
-            return cypher.ReturnDistinct<TResult>(identifier);
+            var text = string.Join(",", items.Select(x => x.ToString()).ToArray());
+            var expression = new ReturnExpression
+            {
+                ResultFormat = CypherResultFormat.DependsOnEnvironment,
+                ResultMode = CypherResultMode.Projection,
+                Text = text
+            };
+            return cypher.ReturnDistinct<TResult>(expression);
         }
     }
 }

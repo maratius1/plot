@@ -9,18 +9,16 @@
 
         public VehicleNode(Vehicle vehicle)
         {
-            Id = vehicle.Id;
-            TypeName = vehicle.TypeName;
+            this["Id"] = vehicle.Id;
+            this["TypeName"] = vehicle.TypeName;
         }
-
-        public string TypeName { get; set; }
-
+        
         public Vehicle AsVehicle()
         {
             return new Vehicle
             {
-                Id = Id,
-                TypeName = TypeName
+                Id = this["Id"],
+                TypeName = this["TypeName"]
             };
         }
     }

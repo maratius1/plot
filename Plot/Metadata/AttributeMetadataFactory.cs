@@ -44,15 +44,27 @@ namespace Plot.Metadata
         {
             using (Timer.Start("Metadata Creation", _logger))
             {
-                var node = new NodeMetadata()
+                var node = new NodeMetadata
                 {
-                    Name = type.Name
+                    Labels = CreateLabels(type, new List<string>()).ToArray()
                 };
                 _cache.Add(type, node);
                 var properties = type.GetProperties().Select(CreateProperty).ToList();
                 node.Set(properties);
                 return node;
             }
+        }
+
+
+        private List<string> CreateLabels(Type type, List<string> labels)
+        {
+            if (type == typeof (object) || type.GetCustomAttributes<IgnoreAttribute>(false).Any())
+            {
+                return labels;
+            }
+            labels = CreateLabels(type.BaseType, labels);
+            labels.Insert(0, type.Name);
+            return labels;
         }
 
         private PropertyMetadata CreateProperty(PropertyInfo propertyInfo)

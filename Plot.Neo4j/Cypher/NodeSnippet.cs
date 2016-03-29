@@ -28,7 +28,7 @@ namespace Plot.Neo4j.Cypher
             return new StringBuilder()
                 .Append(_identifierName)
                 .Append(":")
-                .Append(Metadata.Name)
+                .Append(Metadata.ConcatLabels())
                 .ToString();
         }
 

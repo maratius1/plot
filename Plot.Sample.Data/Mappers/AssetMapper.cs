@@ -35,14 +35,15 @@ namespace Plot.Sample.Data.Mappers
             {
             }
 
-            protected override ICypherFluentQuery OnExecute(ICypherFluentQuery cypher)
+            /*protected override ICypherFluentQuery OnExecute(ICypherFluentQuery cypher)
             {
                 return cypher.ReturnDistinct((asset, sites, type) => new AssetResult
                 {
                     Asset = asset.As<AssetNode>(),
-                    Sites = sites.CollectAs<SiteNode>()
+                    Sites = sites.CollectAs<SiteNode>(),
+                    Type = type
                 });
-            }
+            }*/
         }
 
         #endregion

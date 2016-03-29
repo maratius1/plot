@@ -12,6 +12,7 @@ namespace Plot.Sample.Data.Results
         public OrganisationNode Organisation { get; set; }
 
         public IEnumerable<AssetNode> Assets { get; set; }
+
         public override void Map(Site aggregate)
         {
             aggregate.Name = Site.Name;

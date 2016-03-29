@@ -1,7 +1,8 @@
-﻿namespace Plot.Sample.Data.Nodes
+﻿using System.Collections.Generic;
+
+namespace Plot.Sample.Data.Nodes
 {
-    public abstract class AssetTypeNode
+    public class AssetTypeNode : Dictionary<string, string>
     {
-        public string Id { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace Plot.Sample.Queries
     {
         public GetOrganisationsByName()
         {
-            OrderBy = new[] {"organisation.Name"};
+            OrderBy = new[] {"organisation.Labels"};
         }
 
         public string Name { get; set; }

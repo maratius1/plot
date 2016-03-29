@@ -12,7 +12,9 @@ namespace Plot.Metadata
             _properties = new ConcurrentDictionary<string, PropertyMetadata>();
         }
 
-        public string Name { get; set; }
+        public string Name => Labels[0];
+
+        public string[] Labels { get; set; }
 
         public IEnumerable<PropertyMetadata> Properties => _properties.Values;
 

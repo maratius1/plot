@@ -28,12 +28,12 @@ namespace Plot.Tests.Neo4j.Cypher
 
         private IdentifierNameSnippet CreateSource()
         {
-            return new NodeIdentifierSnippet(new NodeMetadata { Name = "Parent" }, new { Id = "1" });
+            return new NodeIdentifierSnippet(new NodeMetadata { Labels = new [] { "Parent" } }, new { Id = "1" });
         }
 
         private IdentifierNameSnippet CreateDestination()
         {
-            return new NodeIdentifierSnippet(new NodeMetadata { Name = "Child" }, new { Id = "2" });
+            return new NodeIdentifierSnippet(new NodeMetadata { Labels = new [] { "Child" }}, new { Id = "2" });
         }
 
         private IdentifierNameSnippet CreateRelationshipIdentifier()

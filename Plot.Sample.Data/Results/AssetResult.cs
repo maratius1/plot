@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Neo4jClient.Cypher;
+using Newtonsoft.Json.Linq;
 using Plot.Neo4j.Queries;
 using Plot.Sample.Data.Nodes;
 
@@ -11,7 +13,7 @@ namespace Plot.Sample.Data.Results
 
         public AssetNode Asset { get; set; }
 
-        public AssetTypeNode Type { get; set; }
+        public JObject Type { get; set; }
 
         public override void Map(Asset aggregate)
         {

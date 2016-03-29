@@ -14,11 +14,11 @@ namespace Plot.Neo4j.Queries
         where TQuery : IQuery<TAggregate>
         where TResult : ICypherQueryResult<TAggregate>
     {
-        private readonly GraphClient _db;
+        private readonly IGraphClient _db;
 
         private readonly IMetadataFactory _metadataFactory;
 
-        protected AbstractQueryExecutor(GraphClient db, IMetadataFactory metadataFactory)
+        protected AbstractQueryExecutor(IGraphClient db, IMetadataFactory metadataFactory)
         {
             _db = db;
             _metadataFactory = metadataFactory;

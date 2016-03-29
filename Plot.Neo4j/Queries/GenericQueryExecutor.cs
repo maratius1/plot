@@ -10,7 +10,7 @@ namespace Plot.Neo4j.Queries
         where TAggregate : class
         where TDataset : ICypherQueryResult<TAggregate>
     {
-        protected GenericQueryExecutor(GraphClient db, IMetadataFactory metadataFactory) : base(db, metadataFactory)
+        protected GenericQueryExecutor(IGraphClient db, IMetadataFactory metadataFactory) : base(db, metadataFactory)
         {
         }
 

@@ -24,7 +24,7 @@ namespace Plot.Neo4j.Queries
 
         protected virtual ICypherFluentQuery OnExecute(ICypherFluentQuery cypher)
         {
-            return cypher.Return<TDataset>(Metadata);
+            return cypher.ReturnDistinct<TDataset>(Metadata);
         }
     }
 }

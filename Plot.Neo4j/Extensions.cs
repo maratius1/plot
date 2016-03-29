@@ -95,7 +95,7 @@ namespace Plot.Neo4j
             return string.Join(":", metadata.Labels);
         }
 
-        public static ICypherFluentQuery<TResult> Return<TResult>(this ICypherFluentQuery cypher, NodeMetadata metadata)
+        public static ICypherFluentQuery<TResult> ReturnDistinct<TResult>(this ICypherFluentQuery cypher, NodeMetadata metadata)
         {
             var items = new List<object> { new AsSnippet(metadata) };
             foreach (var propertyMetadata in metadata.Properties)
